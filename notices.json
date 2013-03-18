@@ -7,5 +7,10 @@
          },
          "note": "All's well."
       }
-   ]
+   ],
+   "services": {
+      "Website"   : true,
+      "API"       : "higher latency",
+      "Job Queue" : false
+   }
 }
