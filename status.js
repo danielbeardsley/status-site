@@ -1,4 +1,8 @@
 function loadNotices() {
+   _.templateSettings = {
+      escape: /\{([^}]+)\}/
+   };
+
    $.getJSON('notices.json', function(data) {
       var noticeElements = $.map(data.notices, function(notice) {
          var element = $('<li>');
@@ -7,16 +11,24 @@ function loadNotices() {
          return element;
       });
 
-      var serviceElements = $.map(data.services, function(available, service) {
-         var element = $('<li>');
-         var state = available === true  ? 'available' :
-                     available === false ? 'unavailable' :
-                                           'partial';
-         var status = state === 'partial' ?  available : state;
-         element.addClass('service');
-         element.addClass(state);
-         element.text(service + " -- " + status);
-         return element;
+      var serviceTemplate = _.template('\
+      <li class="service {state}">\
+         <span class="name">{name}</span>\
+         <span class="state">{info}</span>\
+      </li>');
+
+      var serviceElements = $.map(data.services, function(available, serviceName) {
+         var service = {
+            name:  serviceName,
+            state: available === true  ? 'available' :
+                   available === false ? 'unavailable' :
+                                         'partial',
+            info:  available === true  ? 'available' :
+                   available === false ? 'unavailable' :
+                                         available
+         }
+         service.info = service.state
+         return $.parseHTML(serviceTemplate(service));
       });
 
       $('#notices' ).empty().append(noticeElements);
