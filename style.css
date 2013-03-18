@@ -39,4 +39,8 @@ header,
 .service.partial {
 }
 
+.template {
+   display:none;
+}
+
 

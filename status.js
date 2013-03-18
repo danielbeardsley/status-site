@@ -4,19 +4,13 @@ function loadNotices() {
    };
 
    $.getJSON('notices.json', function(data) {
+      var noticeTemplate = getTemplate('noticeTemplate');
       var noticeElements = $.map(data.notices, function(notice) {
-         var element = $('<li>');
-         element.addClass('notice');
-         element.text(notice.date + " -- " + notice.note);
-         return element;
+         return noticeTemplate(notice);
       });
+      $('#notices' ).empty().append(noticeElements);
 
-      var serviceTemplate = _.template('\
-      <li class="service {state}">\
-         <span class="name">{name}</span>\
-         <span class="state">{info}</span>\
-      </li>');
-
+      var serviceTemplate = getTemplate('serviceTemplate');
       var serviceElements = $.map(data.services, function(available, serviceName) {
          var service = {
             name:  serviceName,
@@ -27,14 +21,19 @@ function loadNotices() {
                    available === false ? 'unavailable' :
                                          available
          }
-         service.info = service.state
-         return $.parseHTML(serviceTemplate(service));
+         return serviceTemplate(service);
       });
-
-      $('#notices' ).empty().append(noticeElements);
       $('#services').empty().append(serviceElements);
+
       setTimeout(loadNotices, 30000);
    });
+
+   function getTemplate(elementID) {
+      var template = _.template($('#' + elementID).html());
+      return function() {
+         return template.apply(this, arguments);
+      }
+   }
 }
 $(function() {
    loadNotices();
