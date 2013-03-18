@@ -5,14 +5,14 @@ body {
 }
 
 header {
-   background:#eee;
+   background:#e0e0e0;
    color:#555;
    padding:2em 3em;
 }
 
 #leader {
-   padding: 0.5em 1em;
-   background: #e0e0f7;
+   padding: 0.5em;
+   background: white;
 }
 
 header,
@@ -27,16 +27,34 @@ header,
 
 .service {
    display:inline;
-   padding:0.1em 0.3em;
+   padding:0.5em 0.5em;
    margin-right:1em;
+   border: 1px solid rgba(0,0,0,0.2);
+   border-radius:5px;
+   color:#555;
 }
 .service.available {
+   background: #efe;
+   border-color: #5d5;
+}
+.service.available > .state {
+   color:#2a2;
 }
 
 .service.unavailable {
+   background: #fee;
+   border-color: #f99;
+}
+.service.unavailable > .state {
+   color:#f22;
 }
 
 .service.partial {
+   background: #fff0e0;
+   border-color: #fb9;
+}
+.service.partial > .state {
+   color:#f82;
 }
 
 .template {
