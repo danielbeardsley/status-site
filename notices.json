@@ -1,11 +1,20 @@
 {
    "notices": [
       {
-         "date": "Mon, 25 Dec 2013 13:30:00 GMT",
+         "date": "2013-03-17T13:31:48",
          "services": {
-            "site": "available"
+            "Website": "available",
+            "API": true
          },
          "note": "All's well."
+      },
+      {
+         "date": "2013-03-17T12:11:23",
+         "services": {
+            "Website": "available",
+            "API": false
+         },
+         "note": "Network troubles have taken down the API. Investigating..."
       }
    ],
    "services": {
