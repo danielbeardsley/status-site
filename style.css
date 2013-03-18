@@ -25,6 +25,10 @@ header,
    list-style-type:none;
 }
 
+/*********************************************
+ * Services
+ */
+
 .service {
    display:inline;
    padding:0.5em 0.5em;
@@ -56,6 +60,24 @@ header,
 .service.partial > .state {
    color:#f82;
 }
+
+/*********************************************
+ * Notices
+ */
+
+#notices {
+   padding-top:1em;
+}
+.notice {
+   padding:0.5em 1em;
+   margin-bottom:1em;
+   border-bottom:1px solid #f7f7f7;
+}
+
+.notice > time {
+   color:#AAA;
+}
+
 
 .template {
    display:none;
