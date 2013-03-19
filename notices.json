@@ -1,7 +1,7 @@
 {
    "notices": [
       {
-         "date": "2013-03-17T13:31:48",
+         "date": "2013-03-17T13:31:48-0700",
          "services": {
             "Website": "available",
             "API": true
@@ -9,7 +9,7 @@
          "note": "All's well."
       },
       {
-         "date": "2013-03-17T12:11:23",
+         "date": "2013-03-17T12:11:23-0700",
          "services": {
             "Website": "available",
             "API": false

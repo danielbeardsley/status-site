@@ -2,12 +2,18 @@ body {
    padding: 0;
    margin: 0;
    font-family: Helvetica, Arail, sans-serif;
+   background-color:#f7f7f7;
 }
 
 header {
    background:#e0e0e0;
    color:#555;
    padding:2em 3em;
+}
+@media (max-width: 500px) {
+   header {
+      padding:1em 2em;
+   }
 }
 
 #leader {
@@ -23,20 +29,50 @@ header,
 #notices,
 #services {
    list-style-type:none;
+   padding-left:0;
+}
+@media (min-width: 501px) {
+   #notices,
+   #services {
+      padding-left:1em;
+   }
 }
 
 /*********************************************
  * Services
  */
 
+#services {
+   padding:0.5em;
+   padding-left:1em;
+}
 .service {
-   display:inline;
-   padding:0.5em 0.5em;
-   margin-right:1em;
+   display:inline-block;
+   margin:0.3em 0.5em;
+   padding:0.5em;
    border: 1px solid rgba(0,0,0,0.2);
    border-radius:5px;
    color:#555;
 }
+
+@media (max-width: 500px) {
+   #services {
+      padding:0;
+   }
+
+   .service {
+      display:block;
+      margin-right:1em;
+   }
+}
+
+.service > .name {
+   padding-right:2em;
+}
+.service > .state {
+   float:right;
+}
+
 .service.available {
    background: #efe;
    border-color: #5d5;
@@ -69,15 +105,25 @@ header,
    padding-top:1em;
 }
 .notice {
-   padding:0.5em 1em;
-   margin-bottom:1em;
-   border-bottom:1px solid #f7f7f7;
+   padding: 1em;
+   border-bottom: 1px solid #f0f0f0;
 }
 
 .notice > time {
    color:#AAA;
+   padding-right:1em;
+   margin-bottom:0.3em;
 }
 
+@media (max-width: 500px) {
+   .notice > time {
+      display:block;
+   }
+
+   .notice {
+      border-bottom: 1px solid #ddd;
+   }
+}
 
 .template {
    display:none;
