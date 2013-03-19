@@ -6,7 +6,7 @@ function loadNotices() {
    $.getJSON('notices.json', function(data) {
       var noticeTemplate = getTemplate('noticeTemplate');
       var noticeElements = $.map(data.notices, function(notice) {
-         notice.date = new Date(notice.date);
+         notice.date = formatDate(new Date(notice.date));
          return noticeTemplate(notice);
       });
       $('#notices' ).empty().append(noticeElements);
@@ -35,6 +35,17 @@ function loadNotices() {
          return template.apply(this, arguments);
       }
    }
+
+   function formatDate(date) {
+      function pad(n) { return n < 10 ? '0' + n : n }
+      return date.getFullYear() + '-'
+         + pad(date.getMonth() + 1) + '-'
+         + pad(date.getDate()) + ' '
+         + pad((date.getHours()+11)%12+1) + ':'
+         + pad(date.getMinutes()) + ':'
+         + pad(date.getSeconds()) + ' '
+         + (date.getHours() >= 12 ? 'PM' : 'AM');
+   };
 }
 $(function() {
    loadNotices();
