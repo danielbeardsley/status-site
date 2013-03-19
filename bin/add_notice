@@ -1,0 +1,53 @@
+#!/usr/bin/env ruby
+
+require "date"
+require "tempfile"
+require "rubygems"
+require "json"
+
+def notices_path
+   File.dirname(__FILE__) + '/../notices.json'
+end
+
+def write_notices(contents)
+   IO.write(notices_path, JSON.pretty_generate(contents))
+end
+
+def notices
+   JSON.parse(File.read(notices_path))
+end
+
+def notice_template
+   notice = notices['templates']['notice']
+   notice['date'] = DateTime.now.iso8601
+   JSON.pretty_generate notice
+end
+
+def prompt_for_new_notice
+   temp_file = Tempfile.new('notice.js')
+   temp_file.write(notice_template)
+   temp_file.close
+   while
+      success = system("$EDITOR #{temp_file.path}")
+      return nil if !success
+      notice_json = File.read(temp_file.path)
+      begin
+         notice = JSON.parse(notice_json)
+         break
+      rescue
+         puts "Not valid JSON, press Enter to edit again"
+         STDIN.getc
+         next
+      end
+   end
+   notice
+end
+
+notice = prompt_for_new_notice
+if notice
+   notice_data = notices
+   notice_data['notices'].unshift notice
+   write_notices(notice_data)
+else
+   exit(1)
+end

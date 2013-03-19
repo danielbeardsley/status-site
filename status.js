@@ -6,6 +6,7 @@ function loadNotices() {
    $.getJSON('notices.json', function(data) {
       var noticeTemplate = getTemplate('noticeTemplate');
       var noticeElements = $.map(data.notices, function(notice) {
+         notice.date = new Date(notice.date);
          return noticeTemplate(notice);
       });
       $('#notices' ).empty().append(noticeElements);

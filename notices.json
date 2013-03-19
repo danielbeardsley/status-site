@@ -1,25 +1,36 @@
 {
-   "notices": [
-      {
-         "date": "2013-03-17T13:31:48-0700",
-         "services": {
-            "Website": "available",
-            "API": true
-         },
-         "note": "All's well."
+  "notices": [
+    {
+      "date": "2013-03-17T13:31:48-0700",
+      "services": {
+        "Website": "available",
+        "API": true
       },
-      {
-         "date": "2013-03-17T12:11:23-0700",
-         "services": {
-            "Website": "available",
-            "API": false
-         },
-         "note": "Network troubles have taken down the API. Investigating..."
-      }
-   ],
-   "services": {
-      "Website"   : true,
-      "API"       : "higher latency",
-      "Job Queue" : false
-   }
+      "note": "All's well."
+    },
+    {
+      "date": "2013-03-17T12:11:23-0700",
+      "services": {
+        "Website": "available",
+        "API": false
+      },
+      "note": "Network troubles have taken down the API. Investigating..."
+    }
+  ],
+  "services": {
+    "Website": true,
+    "API": "higher latency",
+    "Job Queue": false
+  },
+  "templates": {
+    "notice": {
+      "date": "2013-03-17T12:11:23-0700",
+      "services": {
+        "Website": true,
+        "API": true,
+        "Job Queue": true
+      },
+      "note": "All's well."
+    }
+  }
 }
