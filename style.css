@@ -9,6 +9,14 @@ header {
    background:#e0e0e0;
    color:#555;
    padding:2em 3em;
+   background: rgb(239,239,239); /* Old browsers */
+   background: -moz-linear-gradient(top,  rgba(239,239,239,1) 0%, rgba(219,219,219,1) 100%); /* FF3.6+ */
+   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(239,239,239,1)), color-stop(100%,rgba(219,219,219,1))); /* Chrome,Safari4+ */
+   background: -webkit-linear-gradient(top,  rgba(239,239,239,1) 0%,rgba(219,219,219,1) 100%); /* Chrome10+,Safari5.1+ */
+   background: -o-linear-gradient(top,  rgba(239,239,239,1) 0%,rgba(219,219,219,1) 100%); /* Opera 11.10+ */
+   background: -ms-linear-gradient(top,  rgba(239,239,239,1) 0%,rgba(219,219,219,1) 100%); /* IE10+ */
+   background: linear-gradient(to bottom,  rgba(239,239,239,1) 0%,rgba(219,219,219,1) 100%); /* W3C */
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#dbdbdb',GradientType=0 ); /* IE6-9 */
 }
 
 header > h1 > span {
@@ -26,11 +34,11 @@ header > h1 > span {
 #leader {
    padding: 0.5em;
    background: white;
+   box-shadow: 0 1px 13px rgba(0,0,0,0.2);
 }
 
 header,
 #leader {
-   border-bottom: 1px solid #aaa;
 }
 
 #notices,
