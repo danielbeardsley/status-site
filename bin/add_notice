@@ -18,7 +18,9 @@ def notices
 end
 
 def notice_template
-   notice = notices['templates']['notice']
+   all_notices = notices
+   notice = all_notices['templates']['notice']
+   notice['services'] = all_notices['services']
    notice['date'] = DateTime.now.iso8601
    JSON.pretty_generate notice
 end
@@ -47,6 +49,7 @@ notice = prompt_for_new_notice
 if notice
    notice_data = notices
    notice_data['notices'].unshift notice
+   notice_data['services'].merge! notice['services'] || {}
    write_notices(notice_data)
 else
    exit(1)
