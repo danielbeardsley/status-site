@@ -4,12 +4,21 @@ function loadNotices() {
    };
 
    $.getJSON('notices.json', function(data) {
-      var noticeTemplate = getTemplate('noticeTemplate');
-      var noticeElements = $.map(data.notices, function(notice) {
-         notice.date = formatDate(new Date(notice.date));
-         return noticeTemplate(notice);
+      var noticeTemplate   = getTemplate('noticeTemplate');
+      var dateTemplate     = getTemplate('dateTemplate');
+      var lastDate = null;
+      var noticeElements = []
+      $.each(data.notices, function(index, notice) {
+         var date = new Date(notice.date);
+         notice.date = formatDate(date);
+         notice.time = formatTime(date);
+         if (notice.date !== lastDate) {
+            noticeElements.push(dateTemplate(notice));
+            lastDate = notice.date;
+         }
+         noticeElements.push(noticeTemplate(notice));
       });
-      $('#notices' ).empty().append(noticeElements);
+      $('#notices').empty().append(noticeElements);
 
       var serviceTemplate = getTemplate('serviceTemplate');
       var serviceElements = $.map(data.services, function(available, serviceName) {
@@ -40,8 +49,12 @@ function loadNotices() {
       function pad(n) { return n < 10 ? '0' + n : n }
       return date.getFullYear() + '-'
          + pad(date.getMonth() + 1) + '-'
-         + pad(date.getDate()) + ' '
-         + pad((date.getHours()+11)%12+1) + ':'
+         + pad(date.getDate());
+   };
+
+   function formatTime(date) {
+      function pad(n) { return n < 10 ? '0' + n : n }
+      return pad((date.getHours()+11)%12+1) + ':'
          + pad(date.getMinutes()) + ':'
          + pad(date.getSeconds()) + ' '
          + (date.getHours() >= 12 ? 'PM' : 'AM');

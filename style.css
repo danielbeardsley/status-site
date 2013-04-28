@@ -119,6 +119,7 @@ header,
    padding: 1em 0;
    border-bottom: 1px solid #f0f0f0;
    color:#444;
+   line-height:1.5em;
 }
 @media (max-width: 600px) {
    .notice {
@@ -126,9 +127,15 @@ header,
    }
 }
 
-.notice > time {
-   font-family: monospace;
+li.date {
+   margin: 1em 0;
+   border-bottom: 1px solid #ccc;
+   padding-bottom:0.5em;
    font-size:1.2em;
+}
+.notice > time {
+   float:left;
+   width:8em;
    color:#AAA;
    padding-right:1em;
    margin-bottom:0.3em;
