@@ -48,10 +48,16 @@ function loadNotices() {
       dataType: "json",
       url: filename,
       success: onSuccess,
-      error: function(jqXHR) {
+      error: function(jqXHR, status) {
          if (jqXHR.status == 404 && !usingExampleNotices) {
             usingExampleNotices = true;
             loadNotices();
+         }
+
+         if (status == 'parsererror') {
+            $('#notices')
+               .empty()
+               .append("<b>Error parsing notices file: " + filename + "</b>");
          }
       }
    });
