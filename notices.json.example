@@ -15,6 +15,15 @@
         "API": false
       },
       "note": "Network troubles have taken down the API. Investigating..."
+    },
+    {
+      "date": "2013-03-16T14:09:49-0700",
+      "services": {
+        "Website": "available",
+        "API": true,
+        "Job Queue": true
+      },
+      "note": "Everything is functioning normally"
     }
   ],
   "services": {
