@@ -13,7 +13,8 @@ function loadNotices() {
       var noticeTemplate   = getTemplate('noticeTemplate');
       var dateTemplate     = getTemplate('dateTemplate');
       var lastDate = null;
-      var noticeElements = []
+      var noticeElements = [];
+
       $.each(data.notices, function(index, notice) {
          var date = new Date(notice.date);
          notice.date = formatDate(date);
@@ -26,19 +27,7 @@ function loadNotices() {
       });
       $('#notices').empty().append(noticeElements);
 
-      var serviceTemplate = getTemplate('serviceTemplate');
-      var serviceElements = $.map(data.services, function(available, serviceName) {
-         var service = {
-            name:  serviceName,
-            state: available === true  ? 'available' :
-                   available === false ? 'unavailable' :
-                                         'partial',
-            info:  available === true  ? 'available' :
-                   available === false ? 'unavailable' :
-                                         available
-         }
-         return serviceTemplate(service);
-      });
+      var serviceElements = $.map(data.services, serviceToHtml);
       $('#services').empty().append(serviceElements);
 
       setTimeout(loadNotices, 30000);
@@ -61,6 +50,20 @@ function loadNotices() {
          }
       }
    });
+
+   var serviceTemplate = getTemplate('serviceTemplate');
+   function serviceToHtml(available, serviceName) {
+      var service = {
+         name:  serviceName,
+         state: available === true  ? 'available' :
+                available === false ? 'unavailable' :
+                                      'partial',
+         info:  available === true  ? 'available' :
+                available === false ? 'unavailable' :
+                                      available
+      }
+      return serviceTemplate(service);
+   }
 
    function getTemplate(elementID) {
       var template = _.template($('#' + elementID).html());
