@@ -1,9 +1,15 @@
+$(function() {
+
+var usingExampleNotices = false;
+
 function loadNotices() {
    _.templateSettings = {
       escape: /\{([^}]+)\}/
    };
 
-   $.getJSON('notices.json', function(data) {
+   var filename = usingExampleNotices ? 'notices.json.example' : 'notices.json';
+
+   function onSuccess(data) {
       var noticeTemplate   = getTemplate('noticeTemplate');
       var dateTemplate     = getTemplate('dateTemplate');
       var lastDate = null;
@@ -36,6 +42,18 @@ function loadNotices() {
       $('#services').empty().append(serviceElements);
 
       setTimeout(loadNotices, 30000);
+   }
+
+   $.ajax({
+      dataType: "json",
+      url: filename,
+      success: onSuccess,
+      error: function(jqXHR) {
+         if (jqXHR.status == 404 && !usingExampleNotices) {
+            usingExampleNotices = true;
+            loadNotices();
+         }
+      }
    });
 
    function getTemplate(elementID) {
@@ -60,6 +78,5 @@ function loadNotices() {
          + (date.getHours() >= 12 ? 'PM' : 'AM');
    };
 }
-$(function() {
    loadNotices();
 });
